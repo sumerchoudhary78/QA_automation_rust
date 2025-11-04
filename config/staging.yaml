@@ -1,0 +1,4 @@
+env: "staging"
+base_url: "https://staging.yourcompany.com"
+browser: "firefox"
+api_base_url: "https://staging.yourcompany.com/api"

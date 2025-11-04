@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "crates/lib_test_helpers",
+    "crates/api_tests",
+    "crates/e2e_tests",
+    "crates/load_tests",
+    "runner",
+    "worker",
+]
+resolver = "2"

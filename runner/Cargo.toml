@@ -1,0 +1,13 @@
+[package]
+name = "runner"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+anyhow = "1"
+lib_test_helpers = { path = "../crates/lib_test_helpers" }
+api_tests = { path = "../crates/api_tests" }
+e2e_tests = { path = "../crates/e2e_tests" }
+load_tests = { path = "../crates/load_tests" }
