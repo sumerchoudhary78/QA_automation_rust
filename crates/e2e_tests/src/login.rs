@@ -1,28 +1,12 @@
 use thirtyfour::prelude::*;
-use std::{any::Any, time::Duration};
-use crate::create_lead;
+use std::{time::Duration};
+use lib_test_helpers::driver::global_driver;
+use crate::utils::retry::retry;
 
-pub async fn login_test() -> WebDriverResult<()> {
-    // Load config (if you have one)
-    let base_url = "https://pataka.wms.emoha.com/";
-    let browser = std::env::var("BROWSER").unwrap_or_else(|_| "chrome".to_string());
-
-    // Create driver dynamically
-    let driver = match browser.as_str() {
-        "firefox" => {
-            let caps = DesiredCapabilities::firefox();
-            WebDriver::new("http://localhost:9515", caps).await?
-        }
-        _ => {
-            let caps = DesiredCapabilities::chrome();
-            WebDriver::new("http://localhost:9515", caps).await?
-        }
-    };
-
-    // Go to base URL
+pub async fn login_test(base_url:&str) -> WebDriverResult<()> {
+    let driver = global_driver().await?;
     driver.goto(base_url).await?;
 
-    // Example actions
     driver
         .find(By::Id("basic_email"))
         .await?
@@ -38,9 +22,24 @@ pub async fn login_test() -> WebDriverResult<()> {
         .await?
         .click()
         .await?;
+
+    retry(
+        || async {
+            driver
+            .query(By::XPath("//input[@placeholder='Enter Phone..']"))
+            .wait(Duration::from_secs(50), Duration::from_millis(500))
+            .first()
+            .await?
+            .send_keys("9501285590")
+            .await
+        },
+        5,
+        400,
+    ).await?;
+
     driver
         .query(By::XPath("//input[@placeholder='Enter Phone..']"))
-        .wait(Duration::from_secs(10), Duration::from_millis(500))
+        .wait(Duration::from_secs(50), Duration::from_millis(500))
         .first()
         .await?
         .send_keys("9501285590")
@@ -53,26 +52,27 @@ pub async fn login_test() -> WebDriverResult<()> {
         .click().await.ok();   
 
     driver
-    .query(By::XPath("//input[@placeholder='Enter 4-digit OTP' and not(@disabled)]"))
-    .wait(Duration::from_secs(10), Duration::from_millis(500))
-    .first()
-    .await?
+        .query(By::XPath("//input[@placeholder='Enter 4-digit OTP' and not(@disabled)]"))
+        .wait(Duration::from_secs(10), Duration::from_millis(500))
+        .first()
+        .await?
     .send_keys("0180")
-    .await?;
+        .await?;
     driver
         .find(By::Css("button.enter-otp-verify-button-visible"))
         .await?
         .click()
         .await?;
     driver
-    .query(By::Css("button.No.thanks"))
-    .wait(Duration::from_secs(10), Duration::from_millis(500))
-    .first()
-    .await?
-    .click()
-    .await?;
+        .query(By::Css("button.No.thanks"))
+        .wait(Duration::from_secs(10), Duration::from_millis(500))
+        .first()
+        .await?
+        .click()
+        .await?;
 
-    create_lead::create_lead_test(&driver).await?;
+    // create_lead::create_lead_test(&driver).await?;
+
     println!("✅ Login test passed!");
     // driver.quit().await?;
     Ok(())

@@ -1,5 +1,5 @@
 use thirtyfour::prelude::*;
-use std::{any::Any, time::Duration};
+use std::{time::Duration};
 use crate::utils::drop_down_select::select_dropdown_option;
 use rand::Rng;
 
@@ -45,7 +45,7 @@ pub async fn create_lead_test(driver: &WebDriver) -> WebDriverResult<()> {
 
     
     select_dropdown_option(&driver, By::Id("basic_lead_source_category"), "Paid").await?;
-    select_dropdown_option(&driver, By::Id("basic_lead_source"), "Website Chat").await?;
+    select_dropdown_option(&driver, By::Id("basic_lead_source"), "Website").await?;
 
     driver
     .query(By::XPath("//input[@placeholder='Campaign Name']"))
