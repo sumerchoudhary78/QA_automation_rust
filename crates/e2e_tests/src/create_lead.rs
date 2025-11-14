@@ -1,9 +1,19 @@
 use thirtyfour::prelude::*;
 use std::{time::Duration};
+use crate::login;
 use crate::utils::drop_down_select::select_dropdown_option;
 use rand::Rng;
+use lib_test_helpers::driver::global_driver;
+use lib_test_helpers::session_file::{check_logged_in, restore_session};
 
-pub async fn create_lead_test(driver: &WebDriver) -> WebDriverResult<()> {
+pub async fn create_lead_test(base_url: &str) -> WebDriverResult<()> {
+    let driver = global_driver().await?;
+    let _ = restore_session(&driver, "session_daily", &base_url).await;
+    let logg = check_logged_in(&driver, &base_url).await.unwrap_or(false);
+    if !logg {
+        let _ = login::login_test(&base_url).await;
+    }
+    tokio::time::sleep(Duration::from_millis(2000)).await;
 
     let mut rng = rand::thread_rng();
     let random_part_mobile = rng.gen_range(0..10_000_000);
@@ -63,6 +73,6 @@ pub async fn create_lead_test(driver: &WebDriver) -> WebDriverResult<()> {
     .click().await?;
 
     println!("✅ Create lead test passed!");
-    // driver.quit().await?;
+    driver.quit().await?;
     Ok(())
 }       

@@ -1,6 +1,6 @@
 use thirtyfour::prelude::*;
 use std::{time::Duration};
-use lib_test_helpers::driver::global_driver;
+use lib_test_helpers::{driver::global_driver, session_file::save_session};
 use crate::utils::retry::retry;
 
 pub async fn login_test(base_url:&str) -> WebDriverResult<()> {
@@ -71,6 +71,9 @@ pub async fn login_test(base_url:&str) -> WebDriverResult<()> {
         .click()
         .await?;
 
+    tokio::time::sleep(Duration::from_millis(500)).await;
+    let _ =save_session(&driver, "session_daily").await;
+    
     // create_lead::create_lead_test(&driver).await?;
 
     println!("✅ Login test passed!");
