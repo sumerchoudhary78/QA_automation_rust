@@ -1,11 +1,10 @@
 use serde::Deserialize;
-use anyhow::Result;
 use std::fs;
 use once_cell::sync::Lazy;
 use dotenvy::dotenv;
 use std::env;
 
-/// Struct for environment-specific configurations
+
 #[derive(Debug, Deserialize, Clone)]
 pub struct AppConfig {
     pub env: String,
@@ -15,7 +14,7 @@ pub struct AppConfig {
 }
 
 static CONFIG: Lazy<AppConfig> = Lazy::new(|| {
-    dotenv().ok(); // Load .env if present
+    dotenv().ok();
     let env = env::var("APP_ENV").unwrap_or_else(|_| "dev".to_string());
     let config_path = format!("config/{}.yaml", env);
     let content = fs::read_to_string(&config_path)
