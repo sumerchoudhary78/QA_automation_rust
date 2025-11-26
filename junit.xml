@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite id="0" name="e2e" package="testsuite/e2e" tests="1" errors="0" failures="1" hostname="localhost" timestamp="2025-11-18T18:58:59.270780989Z" time="0.00000004">
+    <testcase name="e2e tests" time="0.00000004">
+      <failure type="E2E test failure" message="Element not found:     &#xA;    Status: 404&#xA;    Additional info:&#xA;        no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;[id=&quot;basic_email&quot;]&quot;}&#xA;          (Session info: chrome=142.0.7444.59)&#xA;        Error: no such element&#xA;        Stacktrace:&#xA;            #0 0x55d8dbebeaea &lt;unknown&gt;&#xA;            #1 0x55d8db90acdb &lt;unknown&gt;&#xA;            #2 0x55d8db95d6c4 &lt;unknown&gt;&#xA;            #3 0x55d8db95d901 &lt;unknown&gt;&#xA;            #4 0x55d8db9ac8b4 &lt;unknown&gt;&#xA;            #5 0x55d8db9a9c87 &lt;unknown&gt;&#xA;            #6 0x55d8db94faca &lt;unknown&gt;&#xA;            #7 0x55d8db9507d1 &lt;unknown&gt;&#xA;            #8 0x55d8dbe85ab9 &lt;unknown&gt;&#xA;            #9 0x55d8dbe88a8c &lt;unknown&gt;&#xA;            #10 0x55d8dbe6ed49 &lt;unknown&gt;&#xA;            #11 0x55d8dbe89685 &lt;unknown&gt;&#xA;            #12 0x55d8dbe566c3 &lt;unknown&gt;&#xA;            #13 0x55d8dbeab7d8 &lt;unknown&gt;&#xA;            #14 0x55d8dbeab9b3 &lt;unknown&gt;&#xA;            #15 0x55d8dbebda83 &lt;unknown&gt;&#xA;            #16 0x7f449309698b &lt;unknown&gt;&#xA;            #17 0x7f449311a9cc &lt;unknown&gt;&#xA;            " />
+    </testcase>
+  </testsuite>
+</testsuites>
