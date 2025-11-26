@@ -88,6 +88,6 @@ pub async fn login_test(base_url: &str) -> WebDriverResult<()> {
     // create_lead::create_lead_test(&driver).await?;
 
     println!("✅ Login test passed!");
-    // driver.quit().await?;
+    driver.quit().await?;
     Ok(())
 }
