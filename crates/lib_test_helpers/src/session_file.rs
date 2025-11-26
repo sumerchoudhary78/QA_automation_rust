@@ -23,7 +23,6 @@ pub async fn save_session(driver: &WebDriver, prefix: &str) -> Result<()> {
     let ls_file = format!("{}_local_storage.json", prefix);
     fs::write(&ls_file, serde_json::to_string_pretty(&local_storage)?)?;
 
-    // Save cookies
     let cookies = driver.get_all_cookies().await?;
     let ck_file = format!("{}_cookies.json", prefix);
     let ck_json = serde_json::to_string_pretty(&cookies)?;
