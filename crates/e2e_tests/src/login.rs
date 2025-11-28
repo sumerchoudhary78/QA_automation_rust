@@ -31,7 +31,7 @@ pub async fn login_test(base_url: &str) -> WebDriverResult<()> {
                 .wait(Duration::from_secs(50), Duration::from_millis(500))
                 .first()
                 .await?
-                .send_keys(&cfg.phone)
+                .send_keys(&cfg.mobile_number)
                 .await
         },
         5,
@@ -44,7 +44,7 @@ pub async fn login_test(base_url: &str) -> WebDriverResult<()> {
         .wait(Duration::from_secs(50), Duration::from_millis(500))
         .first()
         .await?
-        .send_keys(&cfg.phone)
+        .send_keys(&cfg.mobile_number)
         .await?;
     driver
         .query(By::Css("button.otp-send-btn"))
