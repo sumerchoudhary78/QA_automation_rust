@@ -36,7 +36,7 @@ async fn main() -> Result<()> {
         }
         Commands::Api => {
             println!("🔗 Running API tests...");
-            api_tests::run_all_tests().await;
+            api_tests::run_all_tests().await?;
         }
         Commands::Load => {
             println!("⚙️ Running load tests...");
@@ -44,7 +44,7 @@ async fn main() -> Result<()> {
         }
         Commands::All => {
             println!("🚀 Running all tests...");
-            api_tests::ping();
+            api_tests::run_all_tests().await?;
             e2e_tests::run().await?;
             load_tests::run_load();
         }

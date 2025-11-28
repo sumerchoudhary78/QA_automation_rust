@@ -1,0 +1,177 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug unit tests in library 'lib_test_helpers'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--package=lib_test_helpers"
+                ]
+            }
+        },
+        {
+            "name": "Debug unit tests in library 'api_tests'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--package=api_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug example 'admin_login_example'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--example=admin_login_example",
+                    "--package=api_tests"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in example 'admin_login_example'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--example=admin_login_example",
+                    "--package=api_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug example 'create_temp_lead_example'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--example=create_temp_lead_example",
+                    "--package=api_tests"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in example 'create_temp_lead_example'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--example=create_temp_lead_example",
+                    "--package=api_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug example 'usage_examples'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--example=usage_examples",
+                    "--package=api_tests"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in example 'usage_examples'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--example=usage_examples",
+                    "--package=api_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug unit tests in library 'e2e_tests'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--package=e2e_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug unit tests in library 'load_tests'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--package=load_tests"
+                ]
+            }
+        },
+        {
+            "name": "Debug executable 'runner'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=runner",
+                    "--package=runner"
+                ]
+            },
+            "args": ["api"]
+        },
+        {
+            "name": "Debug unit tests in executable 'runner'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--bin=runner",
+                    "--package=runner"
+                ]
+            }
+        },
+        {
+            "name": "Debug executable 'worker'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=worker",
+                    "--package=worker"
+                ]
+            },
+            "args": []
+        },
+        {
+            "name": "Debug unit tests in executable 'worker'",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--bin=worker",
+                    "--package=worker"
+                ]
+            }
+        }
+    ]
+}
