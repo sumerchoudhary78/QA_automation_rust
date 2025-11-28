@@ -1,10 +1,7 @@
-
-
-use clap::{Parser, Subcommand};
 use anyhow::Result;
-use lib_test_helpers::config::get_config;
+use clap::{Parser, Subcommand};
 use lib_test_helpers::chrome_driver::chrome;
-
+use lib_test_helpers::config::get_config;
 
 #[derive(Parser)]
 #[command(name = "qa-runner", version, about = "QA Automation Orchestrator")]
@@ -39,7 +36,7 @@ async fn main() -> Result<()> {
         }
         Commands::Api => {
             println!("🔗 Running API tests...");
-            api_tests::ping();
+            api_tests::run_all_tests().await?;
         }
         Commands::Load => {
             println!("⚙️ Running load tests...");
@@ -47,7 +44,7 @@ async fn main() -> Result<()> {
         }
         Commands::All => {
             println!("🚀 Running all tests...");
-            api_tests::ping();
+            api_tests::run_all_tests().await?;
             e2e_tests::run().await?;
             load_tests::run_load();
         }
