@@ -1,7 +1,7 @@
-use crate::auth::{
+use crate::client::ApiClient;
+use crate::request::auth::{
     LoginInitResponse, LoginRequest, LoginResponse, OtpRequest, VerifyNumberSendOtpRequest,
 };
-use crate::client::ApiClient;
 use anyhow::{Context, Result};
 
 pub struct AuthApi {
