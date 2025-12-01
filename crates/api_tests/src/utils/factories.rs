@@ -1,8 +1,10 @@
+use chrono::{Datelike, Timelike, Utc};
 use fake::{
     faker::{address::en::*, internet::en::*, name::en::*, phone_number::en::*},
     Fake,
 };
 use rand::Rng;
+use std::time::Duration;
 
 pub struct TestDataFactory;
 
@@ -27,12 +29,26 @@ impl TestDataFactory {
         )
     }
 
-    pub fn city() -> String {
-        CityName().fake()
+    pub fn time_fake() -> String {
+        let max_days_back = 30;
+        let seconds_back = rand::thread_rng().gen_range(0..(max_days_back * 24 * 3600));
+
+        let now = Utc::now().naive_utc();
+        let t = now - Duration::from_secs(seconds_back);
+
+        format!(
+            "{:04}-{:02}-{:02} {:02}:{:02}:{:02}",
+            t.year(),
+            t.month(),
+            t.day(),
+            t.hour(),
+            t.minute(),
+            t.second()
+        )
     }
 
-    pub fn uuid() -> String {
-        uuid::Uuid::new_v4().to_string()
+    pub fn city() -> String {
+        CityName().fake()
     }
 
     pub fn random_string(length: usize) -> String {
@@ -49,27 +65,5 @@ impl TestDataFactory {
     pub fn random_number(min: i32, max: i32) -> i32 {
         let mut rng = rand::thread_rng();
         rng.gen_range(min..=max)
-    }
-}
-
-#[allow(dead_code)]
-mod uuid {
-    pub struct Uuid;
-    impl Uuid {
-        pub fn new_v4() -> Self {
-            Uuid
-        }
-        pub fn to_string(&self) -> String {
-            use rand::Rng;
-            let mut rng = rand::thread_rng();
-            format!(
-                "{:08x}-{:04x}-{:04x}-{:04x}-{:012x}",
-                rng.gen::<u32>(),
-                rng.gen::<u16>(),
-                rng.gen::<u16>(),
-                rng.gen::<u16>(),
-                rng.gen::<u64>() & 0xFFFFFFFFFFFF
-            )
-        }
     }
 }
