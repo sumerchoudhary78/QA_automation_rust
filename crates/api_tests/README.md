@@ -2,7 +2,7 @@
 
 A comprehensive, scalable API testing framework built in Rust for testing REST APIs with authentication, request builders, test utilities, and domain-specific API modules.
 
-## 🏗️ Architecture
+## 🏗️ Architecture hehe
 
 ```
 api_tests/
