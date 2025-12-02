@@ -17,7 +17,10 @@ pub use utils::*;
 
 use anyhow::Result;
 
-use crate::api::{lead_create::LeadCreateRequestApi, lead_stage_update::LeadStageUpdateApi};
+use crate::api::{
+    lead_create::LeadCreateRequestApi, lead_notes::LeadNotesApi,
+    lead_stage_update::LeadStageUpdateApi,
+};
 
 pub async fn run_all_tests() -> Result<()> {
     println!("api testing started\n");
@@ -25,6 +28,8 @@ pub async fn run_all_tests() -> Result<()> {
     let auth = AuthApi::new();
     let lead_create = LeadCreateRequestApi::new();
     let lead_stage_update = LeadStageUpdateApi::new();
+    let lead_notes_add = LeadNotesApi::new();
+    let lead_notes_get = LeadNotesApi::new();
 
     println!("auth testing started\n");
 
@@ -148,6 +153,48 @@ pub async fn run_all_tests() -> Result<()> {
         }
         Err(e) => {
             println!("failed step 5");
+            eprintln!("error details: {:?}", e);
+            eprintln!("full error chain:");
+            let mut err: &dyn std::error::Error = &*e;
+            loop {
+                eprintln!("- {}", err);
+                match err.source() {
+                    Some(source) => err = source,
+                    None => break,
+                }
+            }
+            return Ok(());
+        }
+    }
+
+    match lead_notes_add.lead_notes_add_with_factory().await {
+        Ok(response) => {
+            println!("success step 6");
+            println!("response: {:?}", response.data.uuid);
+        }
+        Err(e) => {
+            println!("failed step 6");
+            eprintln!("error details: {:?}", e);
+            eprintln!("full error chain:");
+            let mut err: &dyn std::error::Error = &*e;
+            loop {
+                eprintln!("- {}", err);
+                match err.source() {
+                    Some(source) => err = source,
+                    None => break,
+                }
+            }
+            return Ok(());
+        }
+    }
+
+    match lead_notes_get.lead_notes_get_with_factory().await {
+        Ok(response) => {
+            println!("success step 7");
+            println!("response: {:?}", response.data.data.len());
+        }
+        Err(e) => {
+            println!("failed step 7");
             eprintln!("error details: {:?}", e);
             eprintln!("full error chain:");
             let mut err: &dyn std::error::Error = &*e;
