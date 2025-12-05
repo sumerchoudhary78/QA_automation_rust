@@ -1,6 +1,6 @@
 use crate::client::ApiClient;
-use crate::request::lead::LeadCreateRequest;
-use crate::request::lead::LeadCreateResponse;
+use crate::request_response::lead::LeadCreateRequest;
+use crate::request_response::lead::LeadCreateResponse;
 use crate::utils::factories::TestDataFactory;
 use anyhow::Result;
 

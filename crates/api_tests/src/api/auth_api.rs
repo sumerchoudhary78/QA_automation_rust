@@ -1,5 +1,5 @@
 use crate::client::ApiClient;
-use crate::request::auth::{
+use crate::request_response::auth::{
     LoginInitResponse, LoginRequest, LoginResponse, OtpRequest, VerifyNumberSendOtpRequest,
 };
 use anyhow::{Context, Result};

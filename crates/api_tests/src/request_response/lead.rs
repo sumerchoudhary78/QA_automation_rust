@@ -19,6 +19,7 @@ pub struct LeadCreateResponse {
 }
 
 #[derive(Deserialize)]
+#[allow(non_snake_case)]
 pub struct LeadCreateResponseData {
     pub userName: String,
     pub userId: String,

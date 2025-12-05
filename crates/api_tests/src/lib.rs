@@ -1,6 +1,6 @@
 pub mod client;
 pub mod models;
-pub mod request;
+pub mod request_response;
 
 pub mod api;
 
