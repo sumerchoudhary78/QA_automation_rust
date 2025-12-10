@@ -21,6 +21,14 @@ impl TestDataFactory {
         Name().fake()
     }
 
+    pub fn first_name() -> String {
+        FirstName().fake()
+    }
+
+    pub fn last_name() -> String {
+        LastName().fake()
+    }
+
     pub fn address() -> String {
         format!(
             "{} {}",

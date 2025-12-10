@@ -1,23 +1,24 @@
+pub mod api;
+pub mod api_context;
 pub mod client;
 pub mod models;
 pub mod request_response;
-
-pub mod api;
-
 pub mod utils;
+pub use api::auth_api::AuthApi;
+pub use api::create_invoice::CreateInvoiceApi;
+pub use api::current_user::CurrentUserApi;
+pub use api::elder_data_edit_api::ElderDataEditApi;
+pub use api::lead_create::LeadCreateRequestApi;
+pub use api::lead_stage_update::LeadStageUpdateApi;
+pub use client::ApiClient;
+pub use models::*;
 use std::{
     fs::OpenOptions,
     io::{BufWriter, Write},
 };
-
-use api::auth_api::AuthApi;
-pub use client::ApiClient;
-pub use models::*;
 pub use utils::*;
 
 use anyhow::Result;
-
-use crate::api::{lead_create::LeadCreateRequestApi, lead_stage_update::LeadStageUpdateApi};
 
 pub async fn run_all_tests() -> Result<()> {
     println!("api testing started\n");
@@ -25,6 +26,9 @@ pub async fn run_all_tests() -> Result<()> {
     let auth = AuthApi::new();
     let lead_create = LeadCreateRequestApi::new();
     let lead_stage_update = LeadStageUpdateApi::new();
+    let current_user = CurrentUserApi::new();
+    let elder_data_edit = ElderDataEditApi::new();
+    // let create_invoice = CreateInvoiceApi::new();
 
     println!("auth testing started\n");
 
@@ -124,6 +128,7 @@ pub async fn run_all_tests() -> Result<()> {
             );
             writeln!(writer, "{}", response.data.createdLeadDetails.uuid).unwrap();
             writeln!(profile_uuid_writer, "{}", response.data.userId).unwrap();
+            current_user.get_current_user(&response.data.userId).await?;
         }
         Err(e) => {
             println!("failed step 4");
@@ -139,7 +144,7 @@ pub async fn run_all_tests() -> Result<()> {
             }
             return Ok(());
         }
-    }
+    };
 
     match lead_stage_update.update_lead_stage_with_factory().await {
         Ok(response) => {
@@ -161,6 +166,28 @@ pub async fn run_all_tests() -> Result<()> {
             return Ok(());
         }
     }
+
+    match elder_data_edit.update_elder_data_with_factory().await {
+        Ok(response) => {
+            println!("success step 6");
+            println!("response: {:#?}", response);
+        }
+        Err(e) => {
+            println!("failed step 6");
+            eprintln!("error details: {:?}", e);
+            eprintln!("full error chain:");
+            let mut err: &dyn std::error::Error = &*e;
+            loop {
+                eprintln!("- {}", err);
+                match err.source() {
+                    Some(source) => err = source,
+                    None => break,
+                }
+            }
+            return Ok(());
+        }
+    }
+
     println!("success");
 
     Ok(())
