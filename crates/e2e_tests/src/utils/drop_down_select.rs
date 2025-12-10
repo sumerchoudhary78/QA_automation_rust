@@ -15,6 +15,17 @@ pub async fn select_dropdown_option(
     dropdown.scroll_into_view().await?;
     dropdown.click().await?;
 
+    let search_input = dropdown.query(By::Css("input")).nowait().first().await;
+
+    match search_input {
+        Ok(input) => {
+            input.send_keys(option_text).await?;
+        }
+        Err(_) => {
+            dropdown.send_keys(option_text).await?;
+        }
+    }
+
     // let visible_dropdown = driver
     //     .query(By::Css(".ant-select-dropdown:not(.ant-select-dropdown-hidden)"))
     //     .wait(Duration::from_secs(10), Duration::from_millis(500))

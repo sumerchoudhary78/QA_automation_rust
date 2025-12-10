@@ -1,0 +1,52 @@
+{
+    "d18a9a9d-6795-4f70-a5fd-1f0a78d7d138" : "d90ad92f-6555-4f24-83e9-c8ecf312a373",
+    "a82e47cc-eb31-4eb1-806b-6993462909b1" : "7e971cb9-12da-4556-a00c-4a51a14a47c9",
+    "fa1fcf85-9aad-4cf7-ae0c-2b31e75db6b7" : "2a60faca-f915-4816-8f60-cf7944 27e3d4",
+    "1a18d0c8-9c27-43fb-ae80-a9987ab9939f" : "2542537e-96ab-4323-ad19-b7454f5d2112",
+    "d20e0c63-196c-4568-9ab5-00989a689b50" : "e30389e9-89c2-42ce-850a-60e10aeaabc5",
+    "850eb508-19e2-40d9-9261-10e58c17fe1f" : "14514237-3bcd-47cb-906e-c6fc4fb36097",
+    "e8ab5a6b-0674-4ec4-bc95-3dcb336cf84e" : "80113096-726b-40b8-9eb3-2bfc3d927f65",
+    "6a007982-1a4b-47f9-a4e3-2d650b724cf2" : "adfc102c-30bc-4792-ab48-59e749c4f609",
+    "5056046d-8ee8-4cf8-9214-3911ad9174bb" : "98a2db66-ba4d-41ed-be2f-d22dc89b5557",
+    "
+}
+
+
+{
+    "pos_node_id": "ea5639b8-0fe6-4676-b455-65e251cbc492",
+    "cart_id": "c77ad28a-1162-4598-976e-e72607bd91de",
+    "posReceipt_id": "",
+    "customer_invoice_name": "",
+    "cart_items": [
+        {
+            "cart_item_id": "0af3f586-e29b-41f4-845d-132fc2315569",
+            "discount_percent": 0,
+            "description": null
+        }
+    ],
+    "cart_type": "service",
+    "concierge_ticket": [],
+    "payment": {
+        "amount": "1.00",
+        "method": "link",
+        "send_link_to_email": "dnsm@gmail.com",
+        "send_link_to_mobile": "0000265861"
+    },
+    "share_invoice": [
+        {
+            "phone_number": "8890349935",
+            "email": "dnsm@gmail.com"
+        }
+    ],
+    "start_date": "2025-11-04 18:29:06",
+    "end_date": "2025-11-04 18:29:06",
+    "invoice_date": "2025-11-04 18:28:58",
+    "invoice_payment_due_date": "2025-11-11 18:28:58",
+    "place_of_supply": "19971716-d695-4952-8f8e-bb446759ecb9",
+    "total_discount": 0,
+    "total_mrp": 1,
+    "total_gst": 0,
+    "bill_total": 1,
+    "source": "wms_profile",
+    "lead_uuid": null
+}

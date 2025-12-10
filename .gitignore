@@ -2,3 +2,4 @@
 .env
 session_daily_cookies.json
 session_daily_local_storage.json
+/crates/api_tests/docs/*.txt
