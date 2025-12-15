@@ -1,6 +1,6 @@
+use crate::request_response::Invoice_request_response::pos_items_response::PosItemsResponse;
 use crate::{api_context::ApiContext, ApiClient};
 use anyhow::Result;
-use serde_json::Value;
 
 pub struct PosItemsAllApi {
     client: &'static ApiClient,
@@ -15,8 +15,8 @@ impl PosItemsAllApi {
         }
     }
 
-    pub async fn get_pos_items_all(&self, pos_node_id: &str) -> Result<Value> {
-        let response: Value = self
+    pub async fn get_pos_items_all(&self, pos_node_id: &str) -> Result<()> {
+        let response: PosItemsResponse = self
             .client
             .get(
                 format!(
@@ -28,8 +28,8 @@ impl PosItemsAllApi {
             .send_json()
             .await?;
         self.ctx
-            .store_raw("pos_items_all", "data", response.clone())
+            .store_row_map("pos_items_all", "data", response.clone())
             .unwrap();
-        Ok(response)
+        Ok(())
     }
 }

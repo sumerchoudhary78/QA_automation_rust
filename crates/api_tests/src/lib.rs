@@ -10,6 +10,9 @@ pub use api::current_user::CurrentUserApi;
 pub use api::elder_data_edit_api::ElderDataEditApi;
 pub use api::lead_create::LeadCreateRequestApi;
 pub use api::lead_stage_update::LeadStageUpdateApi;
+pub use api::Invoices::pos_checkout::PosCheckoutApi;
+pub use api::Invoices::pos_items_all::PosItemsAllApi;
+pub use api::Invoices::update_pos_cart_item::UpdatePosCartItemApi;
 pub use client::ApiClient;
 pub use models::*;
 use std::{
@@ -28,6 +31,9 @@ pub async fn run_all_tests() -> Result<()> {
     let lead_stage_update = LeadStageUpdateApi::new();
     let current_user = CurrentUserApi::new();
     let elder_data_edit = ElderDataEditApi::new();
+    let get_pos_items_all = PosItemsAllApi::new();
+    let update_pos_cart_item = UpdatePosCartItemApi::new();
+    let pos_checkout = PosCheckoutApi::new();
     // let create_invoice = CreateInvoiceApi::new();
 
     println!("auth testing started\n");
@@ -185,6 +191,54 @@ pub async fn run_all_tests() -> Result<()> {
                 }
             }
             return Ok(());
+        }
+    }
+
+    match get_pos_items_all
+        .get_pos_items_all("ea5639b8-0fe6-4676-b455-65e251cbc492")
+        .await
+    {
+        Ok(()) => {
+            println!("success step 7");
+        }
+        Err(e) => {
+            println!("failed step 7 {}", e);
+        }
+    }
+
+    match update_pos_cart_item
+        .update_pos_cart_item_with_factory("ea5639b8-0fe6-4676-b455-65e251cbc492")
+        .await
+    {
+        Ok(()) => {
+            println!("success step 8");
+        }
+        Err(e) => {
+            println!("failed step 8 {}", e);
+        }
+    }
+
+    match update_pos_cart_item
+        .update_pos_cart_item_with_factory_and_price("ea5639b8-0fe6-4676-b455-65e251cbc492", &100.0)
+        .await
+    {
+        Ok(()) => {
+            println!("success step 9");
+        }
+        Err(e) => {
+            println!("failed step 9 {}", e);
+        }
+    }
+
+    match pos_checkout
+        .pos_checkout_with_factory("ea5639b8-0fe6-4676-b455-65e251cbc492")
+        .await
+    {
+        Ok(()) => {
+            println!("success step 10");
+        }
+        Err(e) => {
+            println!("failed step 10 {}", e);
         }
     }
 
