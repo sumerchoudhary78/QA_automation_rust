@@ -3,6 +3,8 @@ use serde_json::Value;
 use std::collections::HashMap;
 use std::sync::{Arc, LazyLock, RwLock};
 
+use crate::common::ApiResponse;
+
 #[derive(Debug, thiserror::Error)]
 pub enum ApiContextError {
     #[error("Key '{0}' not found in context")]
@@ -63,6 +65,52 @@ impl ApiContext {
             .insert(instance_key, value);
 
         Ok(())
+    }
+
+    pub fn store_row_map<T: Serialize + Clone>(
+        &self,
+        instance: &str,
+        key: &str,
+        value: ApiResponse<T>,
+    ) -> Result<(), ApiContextError> {
+        let instance_key = format!("{} {}", instance, key);
+        let json_value = serde_json::to_value(&value)
+            .map_err(|e| ApiContextError::SerializationError(e.to_string()))?;
+        self.data
+            .write()
+            .map_err(|_| ApiContextError::LockPoisoned)?
+            .insert(instance_key, json_value);
+
+        Ok(())
+    }
+
+    pub fn get_row_map<T: DeserializeOwned>(
+        &self,
+        instance: &str,
+        key: &str,
+        id: i64,
+    ) -> Result<T, ApiContextError> {
+        let instance_key = format!("{} {}", instance, key);
+        let data = self
+            .data
+            .read()
+            .map_err(|_| ApiContextError::LockPoisoned)?;
+
+        let response = data
+            .get(&instance_key)
+            .ok_or_else(|| ApiContextError::KeyNotFound(instance_key.clone()))?;
+
+        let items = response["data"].as_array().ok_or_else(|| {
+            ApiContextError::InvalidPath("data".to_string(), "not an array".to_string())
+        })?;
+
+        let item = items
+            .iter()
+            .find(|item| item["id"].as_i64() == Some(id))
+            .ok_or_else(|| ApiContextError::KeyNotFound(format!("{} id={}", instance_key, id)))?;
+
+        serde_json::from_value(item.clone())
+            .map_err(|e| ApiContextError::DeserializationError(instance_key, e.to_string()))
     }
 
     pub fn get<T: DeserializeOwned>(&self, key: &str) -> Result<T, ApiContextError> {

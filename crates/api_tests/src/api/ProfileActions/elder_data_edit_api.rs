@@ -74,7 +74,7 @@ impl ElderDataEditApi {
             is_nok_elder_calling: "elder".to_string(),
             email: factories::TestDataFactory::email(),
             reasons_for_downloading_app: None,
-            first_name: factories::TestDataFactory::first_name(),
+            first_name: "Test".to_string(),
             age: Some(58),
             languages: None,
             last_name: factories::TestDataFactory::last_name(),
