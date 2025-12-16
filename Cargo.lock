@@ -90,6 +90,7 @@ dependencies = [
  "async-trait",
  "chrono",
  "fake",
+ "futures",
  "lib_test_helpers",
  "mockito",
  "once_cell",
