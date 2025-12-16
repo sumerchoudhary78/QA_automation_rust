@@ -1,8 +1,8 @@
 use crate::api_context::ApiContext;
 use crate::client::ApiClient;
 use crate::factories;
-use crate::request_response::elder_data_edit::ElderDataEditRequest;
-use crate::request_response::elder_data_edit::ElderDataEditResponse;
+use crate::request_response::user_actions::elder_data_edit::ElderDataEditRequest;
+use crate::request_response::user_actions::elder_data_edit::ElderDataEditResponse;
 
 use anyhow::Result;
 use serde_json::Value;

@@ -1,9 +1,9 @@
 use crate::client::ApiClient;
 use crate::factories;
-use crate::request_response::lead_stage_update_request::LeadStageUpdateRequest;
-use crate::request_response::lead_stage_update_request::LeadStageUpdateResponse;
-use crate::request_response::lead_stage_update_request::LeadStages;
-use crate::request_response::lead_stage_update_request::ServiceUuid;
+use crate::request_response::user_actions::lead_stage_update_request::LeadStageUpdateRequest;
+use crate::request_response::user_actions::lead_stage_update_request::LeadStageUpdateResponse;
+use crate::request_response::user_actions::lead_stage_update_request::LeadStages;
+use crate::request_response::user_actions::lead_stage_update_request::ServiceUuid;
 use anyhow::Result;
 use std::fs;
 use std::fs::File;

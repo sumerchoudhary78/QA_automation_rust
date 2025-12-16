@@ -250,7 +250,7 @@ async fn run_test_steps() -> Result<()> {
                     e.to_string(),
                 );
                 println!("Create Lead failed - {}", e);
-                should_continue = false;
+                should_continue = true;
             }
         }
     }
@@ -345,7 +345,6 @@ async fn run_test_steps() -> Result<()> {
         }
     }
 
-    // Step 8: Update POS Cart Item
     {
         let start = Instant::now();
         match update_pos_cart_item
@@ -413,7 +412,6 @@ async fn run_test_steps() -> Result<()> {
         }
     }
 
-    // Step 10: POS Checkout
     {
         let start = Instant::now();
         match pos_checkout
@@ -431,7 +429,6 @@ async fn run_test_steps() -> Result<()> {
                 );
                 println!("POS Checkout successful");
 
-                // Step 11: Void Invoice (only if checkout succeeded)
                 let void_start = Instant::now();
                 match void_invoice.void_invoice_with_factory().await {
                     Ok(()) => {
