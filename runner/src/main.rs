@@ -25,7 +25,7 @@ async fn main() -> Result<()> {
 
     match cli.command {
         Commands::E2E => {
-            println!("🧪 Running E2E tests...");
+            println!("Running E2E tests...");
             let mut cd = chrome();
             e2e_tests::run().await?;
             // if let Err(e) = e2e_tests::run().await {
@@ -35,15 +35,15 @@ async fn main() -> Result<()> {
             cd.kill().expect("kill process");
         }
         Commands::Api => {
-            println!("🔗 Running API tests...");
+            println!("Running API tests...");
             api_tests::run_all_tests().await?;
         }
         Commands::Load => {
-            println!("⚙️ Running load tests...");
+            println!("Running load tests...");
             load_tests::run_load();
         }
         Commands::All => {
-            println!("🚀 Running all tests...");
+            println!("Running all tests...");
             api_tests::run_all_tests().await?;
             e2e_tests::run().await?;
             load_tests::run_load();
