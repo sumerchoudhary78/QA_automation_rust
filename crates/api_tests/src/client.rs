@@ -18,7 +18,7 @@ pub struct ApiClient {
 impl ApiClient {
     pub fn new(base_url: String) -> Result<Self> {
         let client = ClientBuilder::new()
-            .timeout(Duration::from_secs(30))
+            .timeout(Duration::from_secs(60))
             .cookie_store(true)
             .build()
             .context("Failed to build HTTP client")?;

@@ -3,3 +3,7 @@
 session_daily_cookies.json
 session_daily_local_storage.json
 /crates/api_tests/docs/*.txt
+/crates/api_tests/reports/*.json
+/crates/api_tests/reports/*.xml
+/crates/api_tests/reports/*.html
+
