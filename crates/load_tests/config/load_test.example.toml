@@ -1,0 +1,20 @@
+# Load Test Configuration
+# Copy this to config/load_test.toml and customize
+
+# API base URL
+base_url = "http://localhost:8080"
+
+# Number of concurrent virtual users
+users = 10
+
+# Test duration (e.g., "30s", "5m", "1h")
+run_time = "1m"
+
+# Users spawned per second
+hatch_rate = 2
+
+# Request timeout in seconds
+request_timeout = 30
+
+# Think time between requests in milliseconds (min, max)
+think_time = [500, 2000]

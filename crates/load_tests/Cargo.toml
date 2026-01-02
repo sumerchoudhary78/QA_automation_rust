@@ -3,7 +3,34 @@ name = "load_tests"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "load_tests"
+path = "src/main.rs"
+
 [dependencies]
+# Load testing framework
 goose = "0.17"
+
+# Async runtime
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+# Error handling
 anyhow = "1"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Configuration
+toml = "0.8"
+
+# Reuse existing API infrastructure
+api_tests = { path = "../api_tests" }
+lib_test_helpers = { path = "../lib_test_helpers" }
+
+# HTTP client (matching goose's reqwest version)
+reqwest = { version = "0.11", features = ["json"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
